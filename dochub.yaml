@@ -22,7 +22,9 @@ functions:
                           "internalEndpoint": $.internalEndpoint
                         };
 
-        $map($services, function($v) {
+        [$map($services, function($v) {
             $v~>|$|{"endpoints": $lake.ingress[$.objectMeta.name = $v.*.name].{"host": $.hosts, "http": $.spec.rules}}|
-        })      
+        })]      
       )
+    result:
+      type: array
