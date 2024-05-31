@@ -1,0 +1,75 @@
+{"ingress":[
+{
+    "objectMeta": {
+     "name": "backend-service-java-app",
+     "namespace": "stp-dev",
+     "labels": {
+      "app.kubernetes.io/instance": "backend-service-java-app",
+      "app.kubernetes.io/managed-by": "Helm",
+      "app.kubernetes.io/name": "backend-service",
+      "helm.sh/chart": "java-app-3.2.0",
+      "prometheus.deckhouse.io/custom-target": "backend-service"
+     },
+     "annotations": {
+      "kubernetes.io/ingress.class": "nginx",
+      "meta.helm.sh/release-name": "backend-service",
+      "meta.helm.sh/release-namespace": "stp-dev",
+      "nginx.ingress.kubernetes.io/proxy-body-size": "50m"
+     },
+     "creationTimestamp": "2024-03-20T06:41:14Z",
+     "uid": "025188fe-f469-4df8-9109-335a9756e7b4"
+    },
+    "typeMeta": {
+     "kind": "ingress"
+    },
+    "endpoints": [
+     {
+      "host": "8.206.38.16",
+      "ports": null
+     },
+     {
+      "host": "8.205.38.18",
+      "ports": null
+     }
+    ],
+    "hosts": [
+     "stp.apps.k8s.dev.home.org"
+    ],
+    "spec": {
+     "rules": [
+      {
+       "host": "stp.apps.k8s.dev.home.org",
+       "http": {
+        "paths": [
+         {
+          "path": "/api/",
+          "pathType": "Prefix",
+          "backend": {
+           "service": {
+            "name": "backend-service-java-app",
+            "port": {
+             "number": 8080
+            }
+           }
+          }
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "status": {
+     "loadBalancer": {
+      "ingress": [
+       {
+        "ip": "8.206.38.16"
+       },
+       {
+        "ip": "8.205.38.18"
+       }
+      ]
+     }
+    },
+    "errors": null
+   }
+]}

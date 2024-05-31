@@ -1,0 +1,28 @@
+imports:
+  - ingress-1.json
+  - ingress-2.json
+  - services.json
+
+functions:
+  servicesEndpoints:
+    params:
+      - type: object
+        alias: lake
+        required: false
+    code: >
+      (
+        $lake:= lake;
+
+        $services:= $lake.services.services
+                      .{  $.objectMeta.name: $.objectMeta~>|$|{  "deployment": $.labels."app.kubernetes.io/name"},
+                                                              ["annotations",
+                                                              "creationTimestamp",
+                                                              "labels",
+                                                              "uid"]|,
+                          "internalEndpoint": $.internalEndpoint
+                        };
+
+        $map($services, function($v) {
+            $v~>|$|{"endpoints": $lake.ingress[$.objectMeta.name = $v.*.name].{"host": $.hosts, "http": $.spec.rules}}|
+        })      
+      )

@@ -1,0 +1,100 @@
+{"services":
+    {
+    "listMeta": {
+     "totalItems": 2
+    },
+    "services": [
+     {
+      "objectMeta": {
+       "name": "backend-service-java-app",
+       "namespace": "stp-dev",
+       "labels": {
+        "app.kubernetes.io/instance": "backend-service-java-app",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "backend-service",
+        "helm.sh/chart": "java-app-3.2.0",
+        "prometheus.deckhouse.io/custom-target": "backend-service"
+       },
+       
+       "annotations": {
+        "meta.helm.sh/release-name": "backend-service",
+        "meta.helm.sh/release-namespace": "stp-dev"
+       },
+       "creationTimestamp": "2024-03-20T06:41:14Z",
+       "uid": "608b9f5e-d67a-41bf-8d46-4c74d4dc2da5"
+      },
+      
+      "typeMeta": {
+       "kind": "service"
+      },
+      "internalEndpoint": {
+       "host": "backend-service-java-app.stp-dev",
+       "ports": [
+        {
+         "port": 8080,
+         "protocol": "TCP",
+         "nodePort": 0
+        },
+        {
+         "port": 8081,
+         "protocol": "TCP",
+         "nodePort": 0
+        },
+        {
+         "port": 5005,
+         "protocol": "TCP",
+         "nodePort": 0
+        }
+       ]
+      },
+      "externalEndpoints": [],
+      "selector": {
+       "app.kubernetes.io/instance": "backend-service-java-app",
+       "app.kubernetes.io/name": "backend-service"
+      },
+      "type": "ClusterIP",
+      "clusterIP": "10.222.176.228"
+     },
+     {
+      "objectMeta": {
+       "name": "frontend-service-static-app",
+       "namespace": "stp-dev",
+       "labels": {
+        "app.kubernetes.io/instance": "frontend-service-static-app",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "frontend-service",
+        "helm.sh/chart": "static-app-3.2.0",
+        "prometheus.deckhouse.io/custom-target": "frontend-service"
+       },
+       "annotations": {
+        "meta.helm.sh/release-name": "frontend-service",
+        "meta.helm.sh/release-namespace": "stp-dev"
+       },
+       "creationTimestamp": "2023-10-25T09:14:45Z",
+       "uid": "58705431-6eb3-4f3a-b656-d6ec93ee1131"
+      },
+      "typeMeta": {
+       "kind": "service"
+      },
+      "internalEndpoint": {
+       "host": "frontend-service-static-app.stp-dev",
+       "ports": [
+        {
+         "port": 8080,
+         "protocol": "TCP",
+         "nodePort": 0
+        }
+       ]
+      },
+      "externalEndpoints": [],
+      "selector": {
+       "app.kubernetes.io/instance": "frontend-service-static-app",
+       "app.kubernetes.io/name": "frontend-service"
+      },
+      "type": "ClusterIP",
+      "clusterIP": "10.222.5.225"
+     }
+    ],
+    "errors": []
+   }
+}

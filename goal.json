@@ -1,0 +1,79 @@
+{
+    "backend-service-java-app" : {
+    "name": "backend-service-java-app", //services.objectMeta.name
+    "namespace": "stp-dev", //services.objectMeta.namespace
+    "deployment": "backend-service", //services.objectMeta.labels."app.kubernetes.io/name"
+    "internalEndpoint": { // берём из servicees.json internalEndpoints
+        "host": "backend-service-java-app.stp-dev",
+        "ports": [
+         {
+          "port": 8080,
+          "protocol": "TCP",
+          "nodePort": 0
+         },
+         {
+          "port": 8081,
+          "protocol": "TCP",
+          "nodePort": 0
+         },
+         {
+          "port": 5005,
+          "protocol": "TCP",
+          "nodePort": 0
+         }
+        ]
+       },
+    "endpoint": [ // ingress-1.json нужный эндпоинт ищем по привязке к имени сервиса, структуру эндпоинта упрощаем
+        {
+            "host": "stp.apps.k8s.dev.home.org",
+            "http": {
+             "paths": [
+              {
+               "path": "/api/",
+               "backend": {
+                "service": {
+                 "name": "backend-service-java-app",
+                 "port":  8080
+                }
+               }
+              }
+             ]
+            }
+        }
+    ]
+  },
+
+  "frontend-service-static-app" :{
+    "name" : "frontend-service-static-app",
+    "namespace": "stp-dev", //services.objectMeta.namespace
+    "deployment": "frontend-service", //services.objectMeta.labels."app.kubernetes.io/name"
+    "internalEndpoint": { // берём из servicees.json internalEndpoints
+        "host": "frontend-service-static-app.stp-dev",
+        "ports": [
+         {
+          "port": 8080,
+          "protocol": "TCP",
+          "nodePort": 0
+         }
+        ]
+       },
+    "endpoint": [ // ingress-2.json нужный эндпоинт ищем по привязке к имени сервиса, структуру эндпоинта упрощаем
+        {
+            "host": "stp.apps.k8s.dev.home.org",
+            "http": {
+             "paths": [
+              {
+               "path": "/",
+               "backend": {
+                "service": {
+                 "name": "frontend-service-static-app",
+                 "port":  8080
+                }
+               }
+              }
+             ]
+            }
+        }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{"ingress":[
+{
+ "objectMeta": {
+  "name": "frontend-service-static-app",
+  "namespace": "stp-dev",
+  "labels": {
+   "app.kubernetes.io/instance": "frontend-service-static-app",
+   "app.kubernetes.io/managed-by": "Helm",
+   "app.kubernetes.io/name": "frontend-service",
+   "helm.sh/chart": "static-app-3.2.0",
+   "prometheus.deckhouse.io/custom-target": "frontend-service"
+  },
+  "annotations": {
+   "kubernetes.io/ingress.class": "nginx",
+   "meta.helm.sh/release-name": "frontend-service",
+   "meta.helm.sh/release-namespace": "stp-dev",
+   "nginx.ingress.kubernetes.io/proxy-body-size": "50m"
+  },
+  "creationTimestamp": "2023-10-25T09:14:45Z",
+  "uid": "709a5c1a-e3a9-4d76-93f0-478fa61199d8"
+ },
+ "typeMeta": {
+  "kind": "ingress"
+ },
+ "endpoints": [
+  {
+   "host": "8.206.38.16",
+   "ports": null
+  },
+  {
+   "host": "8.205.38.18",
+   "ports": null
+  }
+ ],
+ "hosts": [
+  "stp.apps.k8s.dev.home.org"
+ ],
+ "spec": {
+  "rules": [
+   {
+    "host": "stp.apps.k8s.dev.home.org",
+    "http": {
+     "paths": [
+      {
+       "path": "/",
+       "pathType": "Prefix",
+       "backend": {
+        "service": {
+         "name": "frontend-service-static-app",
+         "port": {
+          "number": 8080
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "status": {
+  "loadBalancer": {
+   "ingress": [
+    {
+     "ip": "8.206.38.16"
+    },
+    {
+     "ip": "8.205.38.18"
+    }
+   ]
+  }
+ },
+ "errors": null
+}
+]}
